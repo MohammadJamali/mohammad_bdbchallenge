@@ -1,14 +1,28 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:bdb_challenge/main.dart';
+
+const mockHotels = [
+  {
+    'id': "3sYTn4uxXenwTszZPnwK",
+    'link': "https://storage.googleapis.com/travelo-91156.appspot.com"
+        "/hotels/marriott_fallsview/0_reel_marriott_fallsview.mp4",
+    'name': "Marriott Fallsview Niagara"
+  },
+  {
+    'id': "EGJfAm3ZAEJJlbQ6wrol",
+    'link': "https://storage.googleapis.com/travelo-91156.appspot.com"
+        "/hotels/borgosantopietro/0_reel_borgosantopietro.mp4",
+    'name': "Borgo Santo Pietro "
+  },
+  {
+    'id': "PPiYsQcDAkQgqz4xkZKW",
+    'link': "https://storage.googleapis.com/travelo-91156.appspot.com"
+        "/hotels/hurawalhi/0_reel_hurawalhi.mp4",
+    'name': "Hurawalhi Maldives"
+  }
+];
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bdb_challenge">
+    package="demo.mohammad.bdb_challenge">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="bdb_challenge"
         android:name="${applicationName}"

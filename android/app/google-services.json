@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "924253547758",
+    "project_id": "flutter-test-94ae9",
+    "storage_bucket": "flutter-test-94ae9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924253547758:android:157582f48486cee8f297ff",
+        "android_client_info": {
+          "package_name": "com.example.bdb_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924253547758-us7ms0ivtllk0nqtjtm0p6ocajnjmob1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxK6s9uBPNKgzKgoIL6szpUyM-SFzlIgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924253547758-us7ms0ivtllk0nqtjtm0p6ocajnjmob1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "924253547758-5kbri3imhj4cjn269ovn91vb3uqg4muj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bdbChallenge"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924253547758:android:a08b91b0fbe79cccf297ff",
+        "android_client_info": {
+          "package_name": "com.hershel.bdb_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924253547758-rm8o0j1rta6m05l88rbg1citjn2sa8fe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hershel.bdb_challenge",
+            "certificate_hash": "709516926153479881057f30a3cdf5577f5883d4"
+          }
+        },
+        {
+          "client_id": "924253547758-us7ms0ivtllk0nqtjtm0p6ocajnjmob1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxK6s9uBPNKgzKgoIL6szpUyM-SFzlIgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924253547758-us7ms0ivtllk0nqtjtm0p6ocajnjmob1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "924253547758-5kbri3imhj4cjn269ovn91vb3uqg4muj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bdbChallenge"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924253547758:android:dc83690f6ad6d14cf297ff",
+        "android_client_info": {
+          "package_name": "demo.mohammad.bdb_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "924253547758-us7ms0ivtllk0nqtjtm0p6ocajnjmob1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxK6s9uBPNKgzKgoIL6szpUyM-SFzlIgA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924253547758-us7ms0ivtllk0nqtjtm0p6ocajnjmob1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "924253547758-5kbri3imhj4cjn269ovn91vb3uqg4muj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bdbChallenge"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
