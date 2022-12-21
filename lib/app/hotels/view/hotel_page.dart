@@ -1,6 +1,7 @@
 import 'package:bdb_challenge/app/hotels/bloc/hotel_bloc.dart';
-import 'package:bdb_challenge/app/hotels/widget/hotel_video.dart';
+import 'package:bdb_challenge/app/hotels/widgets/hotel_video.dart';
 import 'package:bdb_challenge/repositories/models/enums/bloc_status.dart';
+import 'package:bdb_challenge/widgets/empty_list_placeholder.dart';
 import 'package:bdb_challenge/widgets/error_placeholder.dart';
 import 'package:bdb_challenge/widgets/loading_placeholder.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +23,13 @@ class HotelsPage extends StatelessWidget {
             case BlocStatus.loading:
               return const LoadingPlaceholder();
             case BlocStatus.finished:
+              if (state.hotels.isEmpty) {
+                return const EmptyListPlaceholder();
+              }
               return PageView.builder(
                 itemCount: state.hotels.length,
                 scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) => HotelVideoView(
+                itemBuilder: (context, index) => HotelVideo(
                   model: state.hotels[index],
                 ),
               );

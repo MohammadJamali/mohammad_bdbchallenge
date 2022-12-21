@@ -1,19 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:bdb_challenge/repositories/models/hotel.dart';
 import 'package:bdb_challenge/widgets/error_placeholder.dart';
 import 'package:bdb_challenge/widgets/loading_placeholder.dart';
 
-class HotelVideoView extends StatefulWidget {
-  const HotelVideoView({super.key, required this.model});
+class HotelVideo extends StatefulWidget {
+  const HotelVideo({super.key, required this.model});
 
   final HotelModel model;
 
   @override
-  State<HotelVideoView> createState() => _HotelVideoViewState();
+  State<HotelVideo> createState() => _HotelVideoState();
 }
 
-class _HotelVideoViewState extends State<HotelVideoView> {
+class _HotelVideoState extends State<HotelVideo> {
   late ThemeData _themeData;
 
   VideoPlayerController? _playerController;
@@ -30,7 +32,10 @@ class _HotelVideoViewState extends State<HotelVideoView> {
 
     _playerController = VideoPlayerController.network(widget.model.link);
 
-    await _playerController!.initialize();
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      await _playerController!.initialize();
+    }
+
     await _playerController!.setLooping(true);
     await _playerController!.play();
     setState(() {});

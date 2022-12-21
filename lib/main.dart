@@ -1,5 +1,4 @@
-import 'package:bdb_challenge/app/hotels/bloc/hotel_bloc.dart';
-import 'package:bdb_challenge/app/hotels/view/hotel.dart';
+import 'package:bdb_challenge/app/hotels/hotels.dart';
 import 'package:bdb_challenge/firebase_options.dart';
 import 'package:bdb_challenge/repositories/hotels_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

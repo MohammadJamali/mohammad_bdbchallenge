@@ -26,7 +26,9 @@ dependencies:
   cloud_firestore: ^4.2.0
 
 dev_dependencies:
+  test: ^1.16.0
   bloc_test: ^9.1.0
+  mocktail: ^0.3.0
   integration_test:
     sdk: flutter
   build_runner:
