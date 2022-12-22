@@ -1,8 +1,6 @@
 # Result
 
-
-https://user-images.githubusercontent.com/7347131/209154773-431b2d90-600e-4dad-bc62-7cb262e1dc3d.mp4
-
+https://user-images.githubusercontent.com/7347131/209155724-06083eb9-e897-4f1a-9716-b2d2c8603215.mp4
 
 
 # Beautiful Destinations Technical Challenge
