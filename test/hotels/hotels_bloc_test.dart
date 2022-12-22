@@ -21,7 +21,7 @@ void main() {
     });
 
     blocTest<HotelBloc, HotelState>(
-      'empty list of hotel',
+      'empty list of hotels',
       setUp: () => when(
         () => repository.hotels(),
       ).thenAnswer((invocation) async => const []),

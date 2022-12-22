@@ -1,3 +1,4 @@
+import 'package:bdb_challenge/app/hotels/bloc/video_controller/video_controller_bloc.dart';
 import 'package:bdb_challenge/app/hotels/hotels.dart';
 import 'package:bdb_challenge/firebase_options.dart';
 import 'package:bdb_challenge/repositories/hotels_repository.dart';
@@ -30,12 +31,21 @@ class MyApp extends StatelessWidget {
     return bloc;
   }
 
+  VideoPlayerBloc _createVideoPlayerBloc(BuildContext context) {
+    final hotelBloc = context.read<HotelBloc>();
+    final bloc = VideoPlayerBloc(hotelBloc: hotelBloc);
+    return bloc;
+  }
+
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: _createRepository,
-      child: BlocProvider(
-        create: _createHotelBloc,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<HotelBloc>(create: _createHotelBloc),
+          BlocProvider<VideoPlayerBloc>(create: _createVideoPlayerBloc),
+        ],
         child: MaterialApp(
           title: 'Beautiful Hotels',
           theme: ThemeData(

@@ -1,13 +1,16 @@
-import 'dart:io';
-
+import 'package:bdb_challenge/app/hotels/bloc/video_controller/video_controller_bloc.dart';
+import 'package:bdb_challenge/app/hotels/widgets/video_player_loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 import 'package:bdb_challenge/repositories/models/hotel.dart';
 import 'package:bdb_challenge/widgets/error_placeholder.dart';
-import 'package:bdb_challenge/widgets/loading_placeholder.dart';
 
 class HotelVideo extends StatefulWidget {
-  const HotelVideo({super.key, required this.model});
+  const HotelVideo({
+    super.key,
+    required this.model,
+  });
 
   final HotelModel model;
 
@@ -18,29 +21,6 @@ class HotelVideo extends StatefulWidget {
 class _HotelVideoState extends State<HotelVideo> {
   late ThemeData _themeData;
 
-  VideoPlayerController? _playerController;
-  late Future _playerFuture;
-
-  @override
-  void initState() {
-    _playerFuture = initalizeController();
-    super.initState();
-  }
-
-  Future<void> initalizeController() async {
-    await _playerController?.dispose();
-
-    _playerController = VideoPlayerController.network(widget.model.link);
-
-    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-      await _playerController!.initialize();
-    }
-
-    await _playerController!.setLooping(true);
-    await _playerController!.play();
-    setState(() {});
-  }
-
   @override
   void didChangeDependencies() {
     _themeData = Theme.of(context);
@@ -48,29 +28,39 @@ class _HotelVideoState extends State<HotelVideo> {
     super.didChangeDependencies();
   }
 
-  Widget _backgroundVideo() => FutureBuilder(
-        future: _playerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.hasError ||
-              (_playerController?.value.hasError ?? false)) {
-            return const ErrorPlaceHolder();
-          }
+  Widget _backgroundVideo() => BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
+        buildWhen: (previous, current) =>
+            current.activeDatasource == widget.model.link,
+        builder: (context, VideoPlayerState state) =>
+            state.cache[widget.model.link] != null
+                ? FutureBuilder(
+                    future: state.cache[widget.model.link]!.initializer,
+                    builder: (context, snapshot) {
+                      final controller =
+                          state.cache[widget.model.link]!.controller;
+                      if (snapshot.hasError || controller.value.hasError) {
+                        return const ErrorPlaceHolder();
+                      }
+                      return FittedBox(
+                        fit: BoxFit.cover,
+                        child: SizedBox.fromSize(
+                          size: controller.value.size,
+                          child: VideoPlayer(controller),
+                        ),
+                      );
+                    },
+                  )
+                : const SizedBox(),
+      );
 
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-              return const LoadingPlaceholder();
-            case ConnectionState.active:
-            case ConnectionState.done:
-              return FittedBox(
-                fit: BoxFit.cover,
-                child: SizedBox.fromSize(
-                  size: _playerController!.value.size,
-                  child: VideoPlayer(_playerController!),
-                ),
-              );
-          }
-        },
+  Widget _buffering() => BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
+        buildWhen: (previous, current) =>
+            current.activeDatasource == widget.model.link,
+        builder: (context, VideoPlayerState state) =>
+            VideoPlayerLoadingIndicator(
+          key: UniqueKey(),
+          controller: state.cache[widget.model.link]?.controller,
+        ),
       );
 
   Widget _linearGradient() => Container(
@@ -118,28 +108,30 @@ class _HotelVideoState extends State<HotelVideo> {
         color: Colors.white38,
         clipBehavior: Clip.hardEdge,
         child: InkWell(
-          onTap: _playerController?.value.isInitialized == true
-              ? onVolumePressed
-              : null,
+          onTap: onVolumePressed,
           child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Icon(
-              _playerController?.value.volume == 0
-                  ? Icons.volume_off
-                  : Icons.volume_up,
-              color: Colors.white,
-              size: 16,
+            child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
+              buildWhen: (previous, current) =>
+                  current.activeDatasource == widget.model.link,
+              builder: (context, state) => Icon(
+                (state.cache[widget.model.link]?.controller.value.volume ??
+                            1) ==
+                        0
+                    ? Icons.volume_off
+                    : Icons.volume_up,
+                color: Colors.white,
+                size: 16,
+              ),
             ),
           ),
         ),
       );
 
   void onVolumePressed() {
-    setState(() {
-      _playerController?.setVolume(
-        _playerController?.value.volume == 0 ? 1 : 0,
-      );
-    });
+    context
+        .read<VideoPlayerBloc>()
+        .add(ToggleMuteVideoPlayerEvent(datasource: widget.model.link));
   }
 
   @override
@@ -148,15 +140,10 @@ class _HotelVideoState extends State<HotelVideo> {
       fit: StackFit.expand,
       children: [
         _backgroundVideo(),
+        _buffering(),
         _linearGradient(),
         _videoDescription(),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    _playerController?.dispose();
-    super.dispose();
   }
 }

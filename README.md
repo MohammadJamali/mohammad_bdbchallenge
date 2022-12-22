@@ -1,3 +1,6 @@
+# Result
+
+
 # Beautiful Destinations Technical Challenge
 
 Thank you for taking part in this coding challenge. For this challenge you will be given an unfinished Flutter application, that you have to improve.
